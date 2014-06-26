@@ -27,7 +27,7 @@ class Feature extends DataObject {
 		// The two options for which type of link to add
 		$linkOptions = array("ExternalURL" => "Link to an external page", "InternalURLID" => "Link to an internal page");
 		// If we've set an internal link already, then that option should be pre-selected
-		$selectedOption = ($this->InternalURLID) ? "InteralURLID" : "ExternalURL";
+		$selectedOption = ($this->InternalURLID) ? "InternalURLID" : "ExternalURL";
 		$linkTypeField = OptionsetField::create("LinkType", "", $linkOptions, $selectedOption);
 
 		$externalURLField = TextField::create("ExternalURL", "Link to external page")

@@ -14,7 +14,7 @@
 				var id = this.attr('id'),
 					form = this.closest('form');
 				
-				if(form.find('input[name=LinkType]').val() !== id) {
+				if(form.find('input[name=LinkType]:checked').val() !== id) {
 					this.hide();
 				}
 
