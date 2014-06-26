@@ -19,6 +19,12 @@
 				}
 
 				this._super();
+			},
+			disappear: function() {
+				this.slideUp(500);
+			},
+			reappear: function() {
+				this.slideDown(500);
 			}
 		});
 
@@ -32,8 +38,8 @@
 				var id = this.val(),
 					form = this.closest('form');
 
-				form.find('.field.switchable').hide();
-				form.find('#' + id).show();
+				form.find('.field.switchable').disappear();
+				form.find('#' + id).reappear();
 
 				this._super();
 			}
