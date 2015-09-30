@@ -12,9 +12,12 @@
 		$('.cms-edit-form .field.switchable').entwine({
 			onmatch: function() {
 				var id = this.attr('id'),
-					form = this.closest('form');
-				
-				if(form.find('input[name=LinkType]:checked').val() !== id) {
+					form = this.closest('form'),
+					selectedId = form.find('input[name=LinkType]:checked').val(),
+					baseId = form.attr('id');
+
+				// Rough match - ID may be #FormName_FieldName or #FormName_FieldName_Holder
+				if (!id.match(baseId + '_' + selectedId)) {
 					this.hide();
 				}
 
@@ -30,10 +33,15 @@
 		$('.cms-edit-form input[name=LinkType]').entwine({
 			onclick: function() {
 				var id = this.val(),
-					form = this.closest('form');
+					form = this.closest('form'),
+					baseId = form.attr('id'),
+					switchableFields = form.find('.field.switchable');
 
-				form.find('.field.switchable').hide();
-				form.find('#' + id).show();
+				switchableFields.hide();
+				switchableFields.filter(function() {
+					// Rough match - ID may be #FormName_FieldName or #FormName_FieldName_Holder
+					return this.id.match(baseId + '_' + id);
+				}).show();
 
 				this._super();
 			}
